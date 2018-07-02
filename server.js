@@ -27,12 +27,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/week18Populater");
+if (process.env.MONGGODB_URI) {
+  mongoose.connect(process.env.MONGGODB_URI);
+}else {
+
+  mongoose.connect("mongodb://localhost/week18Populater");
+}
+
+
 
 // Routes
 
 // A GET route for scraping the echoJS website
-app.get("/", function(req, res) {
+app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("https://www.kantipurdaily.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -71,7 +78,7 @@ app.get("/", function(req, res) {
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
-   // res.send("Scrape Complete");
+    res.send("Scrape Complete");
   });
 });
 
