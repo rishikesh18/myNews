@@ -26,12 +26,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
+var MONGODB_Uri = "mongodb://localhost/heroku_0c288p1j";
+
 // Connect to the Mongo DB
 if (process.env.MONGGODB_URI) {
-  mongoose.connect(process.env.MONGGODB_URI);
+  mongoose.connect(MONGGODB_URI);
 }else {
 
-  mongoose.connect("mongodb://localhost/week18Populater");
+  mongoose.connect(MONGODB_Uri);
 }
 
 
