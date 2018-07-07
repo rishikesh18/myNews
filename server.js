@@ -30,7 +30,7 @@ var MONGODB_Uri = "mongodb://localhost/heroku_0c288p1j";
 
 // Connect to the Mongo DB
 if (process.env.MONGODB_URI) {
-  mongoose.connect(MONGODB_URI);
+  mongoose.connect(process.env.MONGODB_URI);
 }else {
 
   mongoose.connect(MONGODB_Uri);
